@@ -1,10 +1,11 @@
 #!/bin/bash
 
-APP_NAME="wifi-unredactor"
+APP_NAME="WiFi Unredactor"
+EXE_NAME="wifi-unredactor"
 APP_DIR="$APP_NAME.app"
 MACOS_DIR="$APP_DIR/Contents/MacOS"
-SOURCE_FILE="$MACOS_DIR/$APP_NAME.swift"
-EXECUTABLE="$MACOS_DIR/$APP_NAME"
+SOURCE_FILE="$MACOS_DIR/$EXE_NAME.swift"
+EXECUTABLE="$MACOS_DIR/$EXE_NAME"
 DEST_DIR="$HOME/Applications"
 
 # Compile the Swift code
@@ -14,6 +15,10 @@ swiftc -o "$EXECUTABLE" "$SOURCE_FILE" -framework Cocoa -framework CoreLocation 
 # Check if compilation was successful
 if [ $? -eq 0 ]; then
     echo "Compilation successful."
+
+    # Ad-hoc sign the binary
+    echo "Signing binary..."
+    codesign --force --deep --sign - "$EXECUTABLE"
 
     # Install the application
     echo "Installing $APP_NAME to $DEST_DIR..."

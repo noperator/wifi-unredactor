@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key>
-    <string>wifi-unredactor</string>
+    <string>WiFi Unredactor</string>
     <key>CFBundleIdentifier</key>
     <string>com.example.wifi-unredactor</string>
     <key>CFBundleVersion</key>
-    <string>1.0</string>
+    <string>2.0</string>
     <key>CFBundleExecutable</key>
     <string>wifi-unredactor</string>
     <key>NSLocationAlwaysUsageDescription</key>
