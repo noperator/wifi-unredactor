@@ -1,6 +1,6 @@
-# wifi-unredactor
+# WiFi Unredactor
 
-`wifi-unredactor` is a minimal macOS application designed to retrieve Wi-Fi network information—specifically, the SSID (network name) and BSSID (access point MAC address)—while adhering to macOS's strict privacy requirements. Starting with macOS Sonoma, Apple introduced changes that restrict access to Wi-Fi information from command-line tools (`airport`, `ioreg`, `networksetup`, `system_profiler`, `wdutil`) without proper location services permissions.
+WiFi Unredactor is a minimal macOS application designed to retrieve Wi-Fi network information—specifically, the SSID (network name) and BSSID (access point MAC address)—while adhering to macOS's strict privacy requirements. Starting with macOS Sonoma, Apple introduced changes that restrict access to Wi-Fi information from command-line tools (`airport`, `ioreg`, `networksetup`, `system_profiler`, `wdutil`) without proper location services permissions.
 
 ```
 𝄢 /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport
@@ -21,10 +21,12 @@ This project provides a solution by using a lightweight GUI wrapper solely to tr
 𝄢 git clone https://github.com/noperator/wifi-unredactor
 𝄢 cd wifi-unredactor
 𝄢 ./build-and-install.sh
-Compiling wifi-unredactor...
+Compiling WiFi Unredactor...
 Compilation successful.
-Installing wifi-unredactor to /Users/noperator/Applications...
-Installation complete. wifi-unredactor is now available in /Users/noperator/Applications
+Signing binary...
+WiFi Unredactor.app/Contents/MacOS/wifi-unredactor: replacing existing signature
+Installing WiFi Unredactor to /Users/clg/Applications...
+Installation complete. WiFi Unredactor is now available in /Users/clg/Applications
 ```
 
 ### Configure
@@ -32,15 +34,15 @@ Installation complete. wifi-unredactor is now available in /Users/noperator/Appl
 You'll need to **grant location services permission** to this application for it to work properly.
 
 1. Navigate to System Settings > Privacy & Security > Location Services. Make sure that Location Services is toggled to the "on" position.
-2. `𝄢 open ~/Applications/wifi-unredactor.app` to trigger the initial prompt for location services permission. Click allow.
-3. Navigate back to System Settings > Privacy & Security > Location Services. If you don't see `wifi-unredactor` in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle `wifi-unredactor` on. (For some reason, clicking allow in step 1 makes this app show up on the list, but in the off position.)
+2. Run `open ~/Applications/WiFi\ Unredactor.app` to trigger the initial prompt for location services permission. Click allow.
+3. Navigate back to System Settings > Privacy & Security > Location Services. If you don't see `WiFi Unredactor` in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle `WiFi Unredactor` on. (For some reason, clicking allow in step 1 makes this app show up on the list, but in the off position.)
 
 ### Usage
 
 Now, you can get your precious (B)SSIDs from CLI 🎉
 
 ```bash
-𝄢 ~/Applications/wifi-unredactor.app/Contents/MacOS/wifi-unredactor
+𝄢 ~/Applications/WiFi\ Unredactor.app/Contents/MacOS/wifi-unredactor
 {
   "interface" : "en0",
   "ssid" : "BrightSquirrelNet72",
