@@ -33,9 +33,9 @@ Installation complete. WiFi Unredactor is now available in /Users/clg/Applicatio
 
 You'll need to **grant location services permission** to this application for it to work properly.
 
-1. Navigate to System Settings > Privacy & Security > Location Services. Make sure that Location Services is toggled to the "on" position.
-2. Run `open ~/Applications/WiFi\ Unredactor.app` to trigger the initial prompt for location services permission. Click allow.
-3. Navigate back to System Settings > Privacy & Security > Location Services. If you don't see `WiFi Unredactor` in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle `WiFi Unredactor` on. (For some reason, clicking allow in step 1 makes this app show up on the list, but in the off position.)
+1. Navigate to System Settings > Privacy & Security > Location Services. Make sure that Location Services is toggled to the "on" position. Keep this window open so you can watch and wait for Wifi Unredactor to appear.
+2. Run `open ~/Applications/WiFi\ Unredactor.app` to trigger the initial prompt for location services permission. Click allow. Sometimes Wifi Unredactor will silently appear in the list of applications under Location Services (with the toggle in the "off" position), so do watch that list in case it shows up.
+3. Navigate back to System Settings > Privacy & Security > Location Services. If you don't see WiFi Unredactor in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle WiFi Unredactor to the "on" position.
 
 ### Usage
 
