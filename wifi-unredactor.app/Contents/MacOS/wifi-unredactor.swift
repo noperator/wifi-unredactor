@@ -14,41 +14,56 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorized {
-            if let interface = CWWiFiClient.shared().interface() {
-                var jsonOutput: [String: String] = [:]
+            guard let interface = CWWiFiClient.shared().interface() else {
+                print(toJSON(["error": "no wifi interface found"]))
+                NSApp.terminate(nil)
+                return
+            }
 
-                jsonOutput["interface"] = interface.interfaceName
+            do {
+                let networks = try interface.scanForNetworks(withName: nil)
 
-                if let ssid = interface.ssid() {
-                    jsonOutput["ssid"] = ssid
-                } else {
-                    jsonOutput["ssid"] = "failed to retrieve SSID"
-                }
+                let accessPoints: [[String: Any]] = networks
+                    .sorted { $0.rssiValue > $1.rssiValue } // strongest signal first
+                    .map { network in
+                        [
+                            "ssid":    network.ssid   ?? "<hidden>",
+                            "bssid":   network.bssid  ?? "unknown",
+                            "rssi":    network.rssiValue,
+                            "channel": network.wlanChannel?.channelNumber ?? -1,
+                        ]
+                    }
 
-                if let bssid = interface.bssid() {
-                    jsonOutput["bssid"] = bssid
-                } else {
-                    jsonOutput["bssid"] = "failed to retrieve BSSID"
-                }
+                let output: [String: Any] = [
+                    "interface":    interface.interfaceName ?? "unknown",
+                    "access_points": accessPoints
+                ]
 
-                if let jsonData = try? JSONSerialization.data(withJSONObject: jsonOutput, options: .prettyPrinted),
+                if let jsonData = try? JSONSerialization.data(withJSONObject: output, options: .prettyPrinted),
                    let jsonString = String(data: jsonData, encoding: .utf8) {
                     print(jsonString)
                 } else {
-                    print("error: failed to create JSON")
+                    print(toJSON(["error": "failed to serialize JSON"]))
                 }
+
+            } catch {
+                print(toJSON(["error": "scan failed: \(error.localizedDescription)"]))
             }
+
             NSApp.terminate(nil)
+
         } else {
-            let jsonOutput = ["error": "location services denied"]
-            if let jsonData = try? JSONSerialization.data(withJSONObject: jsonOutput, options: .prettyPrinted),
-               let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
-            } else {
-                print("error: failed to create JSON")
-            }
+            print(toJSON(["error": "location services denied"]))
             NSApp.terminate(nil)
         }
+    }
+
+    func toJSON(_ dict: [String: String]) -> String {
+        guard let data = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted),
+              let str = String(data: data, encoding: .utf8) else {
+            return #"{"error": "json serialization failed"}"#
+        }
+        return str
     }
 }
 

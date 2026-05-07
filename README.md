@@ -32,7 +32,9 @@ Installation complete. wifi-unredactor is now available in /Users/noperator/Appl
 You'll need to **grant location services permission** to this application for it to work properly.
 
 1. `𝄢 open ~/Applications/wifi-unredactor.app` to trigger the initial prompt for location services permission. Click allow.
-2. Navigate to System Settings > Privacy & Security > Location Services. If you don't see `wifi-unredactor` in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle `wifi-unredactor` on. (For some reason, clicking allow in step 1 makes this app show up on the list, but in the off position.)
+2. Scroll to and enable `wifi-unredactor` [here](x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices).
+
+> If this link doesn't work, you can try `open "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"` in Terminal, or manually navigate to System Settings > Privacy & Security > Location Services. If you don't see `wifi-unredactor` in the list of apps, try refreshing the list by clicking the back button and then clicking back into Location Services. Toggle `wifi-unredactor` on. (For some reason, clicking allow in step 1 makes this app show up on the list, but in the off position.)
 
 ### Usage
 
